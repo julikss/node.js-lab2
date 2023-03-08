@@ -13,18 +13,28 @@ request(url, (error, response, html) => {
     console.log(siteHeading.text());
 
     links.each((i, link) => {
-      requestNewsPage($(link).attr("href"), (newsText) => newsArray.push({heading: $(link).text(), text: newsText}));
+      newsArray.push({url: $(link).attr("href"), heading: $(link).text()});
     })
+    getNewsText(newsArray);
   }
 });
 
-const requestNewsPage = (urlPage, callback) => {
-  request(urlPage, (error, response, html) => {
-    if (!error && response.statusCode == 200) {
-      const $ = cheerio.load(html);
-      const newsText = $('.c-article__body p');
-    
-      callback(newsText.text());      
-    }
-  });
+const requestNewsPage = (urlPage) => {
+  return new Promise((resolve, reject) => {
+    request(urlPage, (error, response, html) => {
+      if (!error && response.statusCode == 200) {
+        const $ = cheerio.load(html);
+        const newsText = $('.c-article__body p');  
+        resolve(newsText.text());
+      }
+    })
+  })
+}
+
+const getNewsText = (newsArr) => {
+  let requests = newsArr.map(element =>
+    requestNewsPage(element.url)
+  );
+
+  Promise.all(requests).then(res => res.forEach((el, index) => {newsArr[index].text = el})).then(res => console.log(newsArr));
 }
