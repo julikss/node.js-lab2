@@ -47,7 +47,7 @@ const getNewsText = (newsArr) => {
 
   Promise.all(requests)
   .then(res => res.forEach((el, index) => {newsArr[index].text = el}))
-  .then(res => writeToFiles(newsArr));
+  .then(res => writeToFiles(newsArray));
 }
 
 const writeToFiles = (newsArr) => {
