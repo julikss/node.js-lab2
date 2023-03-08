@@ -5,20 +5,28 @@ const url = 'https://tsn.ua/news';
 
 let newsArray = [];
 
-request(url, (error, response, html) => {
-  if (!error && response.statusCode == 200) {
-    const $ = cheerio.load(html);
-    const siteHeading = $('.c-section__title');
-    const links = $('.c-card__link');
+const sendRequest = () => {
+  newsArray = [];
+  request(url, (error, response, html) => {
+    if (!error && response.statusCode == 200) {
+      const $ = cheerio.load(html);
+      const siteHeading = $('.c-section__title');
+      const links = $('.c-card__link');
+    
+      links.each((i, link) => {
+        newsArray.push({url: $(link).attr("href"), heading: $(link).text()});
+      })
+      getNewsText(newsArray);
+    }
+  });
+}
 
-    console.log(siteHeading.text());
-
-    links.each((i, link) => {
-      newsArray.push({url: $(link).attr("href"), heading: $(link).text()});
-    })
-    getNewsText(newsArray);
-  }
-});
+const setIntervalRequest = () => {
+  sendRequest();
+  setInterval(() => {
+    sendRequest();
+  }, 60000);
+}
 
 const requestNewsPage = (urlPage) => {
   return new Promise((resolve, reject) => {
@@ -39,14 +47,15 @@ const getNewsText = (newsArr) => {
 
   Promise.all(requests)
   .then(res => res.forEach((el, index) => {newsArr[index].text = el}))
-  .then(res => console.log(newsArr))
-  .then(res => writeToFiles(newsArr));
+  .then(res => writeToFiles(newsArray));
 }
 
 const writeToFiles = (newsArr) => {
   newsArr.forEach((el, index) => {
-    fs.writeFile(`${index}.txt`, `${el.heading}\n${el.text}`, (err) => {
+    fs.writeFile(`news/${index}.txt`, `${el.heading}\n${el.text}`, (err) => {
       if(err) throw err;
     });
   });
 }
+
+module.exports = setIntervalRequest;
