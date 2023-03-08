@@ -12,9 +12,7 @@ const sendRequest = () => {
       const $ = cheerio.load(html);
       const siteHeading = $('.c-section__title');
       const links = $('.c-card__link');
-  
-      console.log(siteHeading.text());
-  
+    
       links.each((i, link) => {
         newsArray.push({url: $(link).attr("href"), heading: $(link).text()});
       })
@@ -49,7 +47,6 @@ const getNewsText = (newsArr) => {
 
   Promise.all(requests)
   .then(res => res.forEach((el, index) => {newsArr[index].text = el}))
-  .then(res => console.log(newsArr))
   .then(res => writeToFiles(newsArr));
 }
 
@@ -61,5 +58,4 @@ const writeToFiles = (newsArr) => {
   });
 }
 
-setIntervalRequest();
 module.exports = setIntervalRequest;
