@@ -3,10 +3,8 @@ const request = require("request");
 const cheerio = require("cheerio");
 const url = 'https://tsn.ua/news';
 
-let newsArray = [];
-
 const sendRequest = () => {
-  newsArray = [];
+  let newsArray = [];
   request(url, (error, response, html) => {
     if (!error && response.statusCode == 200) {
       const $ = cheerio.load(html);
@@ -47,7 +45,7 @@ const getNewsText = (newsArr) => {
 
   Promise.all(requests)
   .then(res => res.forEach((el, index) => {newsArr[index].text = el}))
-  .then(res => writeToFiles(newsArray));
+  .then(res => writeToFiles(newsArr));
 }
 
 const writeToFiles = (newsArr) => {

@@ -4,21 +4,25 @@ const setIntervalRequest = require("./scrapper.js");
 const host = 'localhost';
 const port = 8000;
 const newsFolder = './news/';
-let newsFiles = [];
+let newsFiles = {};
 
 setIntervalRequest();
 
 fs.readdir(newsFolder, (err, files) => {
-  files.forEach(el => newsFiles.push(el));
+
+  files.forEach(el => {
+    fs.readFile(`news/${el}`, 'utf8', (err, data) => {
+      newsFiles[`${el}`] = data;
+    })
+  })
 });
 
 const requestListener = (request, response) => {
+  response.setHeader("Content-Type", "application/json");
   response.writeHead(200);
-  response.write('<ul>')
-  for (let i = 0; i < newsFiles.length; i++) {
-    response.write(`<li>${newsFiles[i]}</li>`)
-  }
-  response.write('</ul>')
+  
+  response.write(`${JSON.stringify(newsFiles)}`);
+
   response.end();
 };
 
