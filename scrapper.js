@@ -1,3 +1,4 @@
+const fs = require("fs");
 const request = require("request");
 const cheerio = require("cheerio");
 const url = 'https://tsn.ua/news';
@@ -36,5 +37,16 @@ const getNewsText = (newsArr) => {
     requestNewsPage(element.url)
   );
 
-  Promise.all(requests).then(res => res.forEach((el, index) => {newsArr[index].text = el})).then(res => console.log(newsArr));
+  Promise.all(requests)
+  .then(res => res.forEach((el, index) => {newsArr[index].text = el}))
+  .then(res => console.log(newsArr))
+  .then(res => writeToFiles(newsArr));
+}
+
+const writeToFiles = (newsArr) => {
+  newsArr.forEach((el, index) => {
+    fs.writeFile(`${index}.txt`, `${el.heading}\n${el.text}`, (err) => {
+      if(err) throw err;
+    });
+  });
 }
