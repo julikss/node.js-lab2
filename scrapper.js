@@ -25,7 +25,7 @@ const setIntervalRequest = () => {
   sendRequest();
   setInterval(() => {
     sendRequest();
-  }, 60000);
+  }, 10000);
 }
 
 const requestNewsPage = (urlPage) => {

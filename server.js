@@ -14,11 +14,9 @@ fs.readdir(newsFolder, (err, files) => {
 
 const requestListener = (request, response) => {
   response.writeHead(200);
-  response.write('<ul>')
-  for (let i = 0; i < newsFiles.length; i++) {
-    response.write(`<li>${newsFiles[i]}</li>`)
-  }
-  response.write('</ul>')
+  
+  response.write(`${newsFiles}`);
+
   response.end();
 };
 
