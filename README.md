@@ -38,7 +38,18 @@ there must be sth
 
 ***5. Як обробляються помилки при використанні Promise API?***
 <br/>
-there must be sth
+Обробка помилок відбувається за допомогою 
+1)catch
+fetch('https://exampleserver.com')
+  .then(response => response.json())
+  .catch(err => console.log(err)) 
+2)використання функції then(), де її другий параметр представляє обробник помилки, який як параметр отримує передане з функції reject значення:
+promise
+  .then(function(value){
+  },
+  function(error){
+
+  });
 
 ***6. Як створити директорію через модуль fs? За що відповідає параметр mode?***
 <br/>
