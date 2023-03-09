@@ -38,13 +38,17 @@ there must be sth
 
 ***5. Як обробляються помилки при використанні Promise API?***
 <br/>
-Обробка помилок відбувається за допомогою 
+Обробка помилок відбувається за допомогою
+<br/>
 1)catch
+<br/>
 fetch('https://exampleserver.com')
   .then(response => response.json())
   .catch(err => console.log(err)) 
+  <br/>
 2)використання функції then(), де її другий параметр представляє обробник помилки, який як параметр отримує передане з функції reject значення:
 promise
+<br/>
   .then(function(value){
   },
   function(error){
