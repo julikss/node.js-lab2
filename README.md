@@ -22,7 +22,7 @@ there must be sth
 
 ***1. В чому різниця між setTimeout та setInterval?***
 <br/>
-there must be sth
+setTimeout allows us to run a function once after the interval of time. setInterval allows us to run a function repeatedly, starting after the interval of time, then repeating continuously at that interval.
 
 ***2. Що таке блокуючий код?***
 <br/>
