@@ -19,11 +19,13 @@ const sendRequest = () => {
   });
 }
 
-const setIntervalRequest = () => {
-  sendRequest();
-  setInterval(() => {
+const setIntervalRequest = (callback) => {
     sendRequest();
-  }, 60000);
+    callback();
+    setInterval(() => {
+      sendRequest();
+      callback();
+    }, 60000);
 }
 
 const requestNewsPage = (urlPage) => {
