@@ -49,6 +49,7 @@ fetch('https://exampleserver.com')
   .catch(err => console.log(err)) 
   <br/>
 2)використання функції then(), де її другий параметр представляє обробник помилки, який як параметр отримує передане з функції reject значення:
+<br/>
 promise
 <br/>
   .then(function(value){
