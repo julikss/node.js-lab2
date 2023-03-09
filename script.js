@@ -6,7 +6,7 @@ const displayNews = (arrOfNews) => {
   
   for (const el of arrOfNews) {
       listOfFiles += `
-        <div class="names">${Object.keys(el)[0]}</div>
+        <li class="names">${Object.keys(el)[0]}</li>
       `
     }
   
