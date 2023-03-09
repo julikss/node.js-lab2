@@ -6,14 +6,15 @@ const port = 8000;
 const newsFolder = './news/';
 let newsFiles = [];
 
-setIntervalRequest();
-
-fs.readdir(newsFolder, (err, files) => {
-  files.forEach(el => {
-    fs.readFile(`news/${el}`, 'utf8', (err, data) => {
-      newsFiles.push({[`${el}`]: data})
+setIntervalRequest(() => {
+  newsFiles = [];
+  fs.readdir(newsFolder, (err, files) => {
+    files.forEach(el => {
+      fs.readFile(`news/${el}`, 'utf8', (err, data) => {
+        newsFiles.push({[`${el}`]: data})
+      })
     })
-  })
+  });
 });
 
 const requestListener = (request, response) => {
