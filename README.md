@@ -43,16 +43,20 @@ there must be sth
 1)catch
 <br/>
 fetch('https://exampleserver.com')
+<br/>
   .then(response => response.json())
+  <br/>
   .catch(err => console.log(err)) 
   <br/>
 2)використання функції then(), де її другий параметр представляє обробник помилки, який як параметр отримує передане з функції reject значення:
 promise
 <br/>
   .then(function(value){
+  <br/>
   },
+  <br/>
   function(error){
-
+<br/>
   });
 
 ***6. Як створити директорію через модуль fs? За що відповідає параметр mode?***
