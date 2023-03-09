@@ -59,6 +59,34 @@ promise
   function(error){
 <br/>
   });
+  3)try..catch
+  <br/>
+const myPromise = new Promise(function(resolve, reject){
+<br/>
+    try{
+    <br/>
+        console.log("Start");
+        <br/>
+        startWork();      // doesn't exist func
+        <br/>
+        resolve("Resolve");
+        <br/>
+    }
+    <br/>
+    catch(err){
+    <br/>
+        reject(`|Error: ${err.message}`);
+        <br/>
+    }
+    <br/>
+});
+<br/>
+myPromise.catch( function(error){
+<br/>
+    console.log(error);
+    <br/>
+});
+<br/>
 
 ***6. Як створити директорію через модуль fs? За що відповідає параметр mode?***
 <br/>
