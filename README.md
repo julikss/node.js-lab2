@@ -26,7 +26,7 @@ setTimeout allows us to run a function once after the interval of time. setInter
 
 ***2. Що таке блокуючий код?***
 <br/>
-there must be sth
+Blocking is when the additional Javascript operation is blocked until the non-javascript operation is completed. The blocking method is executed synchronously. That means that the program is executed line by line.
 
 ***3. Які переваги асинхронного читання з диску перед синхронним?***
 <br/>
